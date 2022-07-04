@@ -32,6 +32,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.security.Principal;
 import java.util.Date;
@@ -48,6 +49,7 @@ import static com.mjtech.mybuddy.config.OAuth2Provider.google;
  * AccountController. class that manage
  * request/response logic of user account.
  */
+
 @Controller
 public class AccountController {
 
@@ -176,6 +178,7 @@ public class AccountController {
    * @param result    a BindingResult
    * @return login view
    */
+  @Transactional
   @PostMapping(value = "/newUser")
   public String newUser(
           @Valid SignupDto signupDto, BindingResult result,
@@ -219,21 +222,22 @@ public class AccountController {
     Set<UserRole> userRoles = new HashSet<>();
     userRoles.add(new UserRole(user, role));
 
-
-    userService.createUser(user, userRoles);
-
     Account account = new Account();
     account.setCreatedAt(new Date());
     account.setBalance(0);
     account.setUser(user);
-    accountService.saveAccount(account);
+
 
     Connection connection = new Connection();
     connection.setReceiver(user);
     connection.setCreatedAt(new Date());
     connection.setSender(admin);
     connection.setStatus(Status.ACTIVE);
+
+    userService.createUser(user, userRoles);
+    accountService.saveAccount(account);
     connectionService.saveConnection(connection);
+
 
     log.error("{}, successful added!", user.getUsername());
     return "login";
