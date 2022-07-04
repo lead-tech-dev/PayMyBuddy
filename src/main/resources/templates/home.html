@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1000/xhtml">
+<head>
+    <head th:replace="common/header :: common-header"/>
+</head>
+<body>
+<div th:replace="common/header :: header-top"/>
+<div th:replace="common/header :: header"/>
+
+<div class='hero-area'>
+    <div class='container'>
+        <div class='row'>
+            <div class='hero-area__info'>
+                <h2>
+                    Le portefeuille en ligne pour ceux qui gagnent
+                    et transfèrent de l’argent
+                </h2>
+                <p>Où que vous soyez et quoi que vous souhaitiez faire
+                    de votre argent, il suffit d'utiliser Pay My Buddy.
+                </p>
+
+                <a class='btn-primary' th:href="@{/signup}">Créer un compte</a>
+            </div>
+            <div class='hero-area__img'></div>
+        </div>
+    </div>
+</div>
+<div class='how-it-work-area'>
+    <div class='container'>
+        <div class='row'>
+            <div class='how-it-work-area__items'>
+                <div class='item'>
+                    <img alt='icon-account' src='images/add-user.png'/>
+                    <h3>Compte</h3>
+                    <p>Je crèe un compte par le biais du
+                        formulaire de création de compte
+                    </p>
+                </div>
+                <div class='item'>
+                    <img alt='icon-account' src='images/network.png'/>
+                    <h3>Connections</h3>
+                    <p>J'ajoute des connections à ma liste.</p>
+                </div>
+                <div class='item'>
+                    <img alt='icon-account' src='images/transfer.png'/>
+                    <h3>Connections</h3>
+                    <p>je transfère et je reçois de l'argent.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class='services-area'>
+    <div class='container'>
+        <div class='row'>
+            <div class='services-area__img'>
+                <p></p>
+            </div>
+            <div class='services-area__info'>
+                <h2>Payer entre amis</h2>
+                <p>Pour rembourser Matilde qui a payer le resto,
+                    il me suffit de l'avoir dans ma liste de connection.</p>
+                <a class='btn-primary' th:href="@{/contact}">learn more</a>
+            </div>
+        </div>
+        <div class='row reverse'>
+            <div class='services-area__img'>
+                <p></p>
+            </div>
+            <div class='services-area__info'>
+                <h2>Payer entre amis</h2>
+                <p>Pour rembourser Matilde qui a payer le resto,
+                    il me suffit de l'avoir dans ma liste de connection.</p>
+                <a class='btn-primary' th:href="@{/contact}">learn more</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:replace="common/header :: footer"/>
+<div th:replace="common/header :: body-bottom-scripts"/>
+</body>
+</html>

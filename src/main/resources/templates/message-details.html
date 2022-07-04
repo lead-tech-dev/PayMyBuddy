@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1000/xhtml">
+<head>
+    <head th:replace="common/header :: common-header"/>
+</head>
+<body>
+<div th:replace="common/header :: header-top"/>
+<div th:replace="common/header :: header"/>
+
+<div class='current-link-area'>
+    <div class='container'>
+        <div class='row'>
+            <div class='current-link-area__links'>
+                <a class='active' th:href="@{/myProfile}">Admin</a>
+                <span>/</span>
+                <a class='active' th:href="@{/myProfile/admin/messages}">Messages</a>
+                <span>/</span>
+                <a class='active' href='#0'>1</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="content-area">
+    <div class="container">
+        <div class="row">
+            <div class="content-area__message">
+                <div class="message-box">
+                    <div class='head'>
+                        <h3>Send by: <span th:text="${contact.firstname} + ' ' + ${contact.lastname} "></span></h3>
+                        <h3>Date: <span th:text="${contact.createdAt}"></span></h3>
+                        <h3>Email: <span th:text="${contact.email}"></span></h3>
+                        <h3>Subject: <span th:text="${contact.subject}"></span></h3>
+                    </div>
+                    <div class='body'>
+                        <h3>Message: <span th:text="${contact.message}"></span>
+                        </h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:replace="common/header :: footer"/>
+<div th:replace="common/header :: body-bottom-scripts"/>
+</body>
+</html>

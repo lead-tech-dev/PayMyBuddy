@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1000/xhtml"
+>
+<head>
+    <head th:replace="common/header :: common-header"/>
+</head>
+<body>
+<div th:replace="common/header :: header-top"/>
+<div th:replace="common/header :: header"/>
+
+<div class='current-link-area'>
+    <div class='container'>
+        <div class='row'>
+            <div class='current-link-area__links'>
+                <a th:href="@{/myProfile}">Profile</a>
+                <span>/</span>
+                <a class='active' href="#O">Add bank</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="content-area">
+    <div class="container">
+        <div class="row">
+            <div class="content-area__profile">
+                <div class="info-box">
+                    <div class='password-manage'>
+                        <h3>Add bank account</h3>
+                        <div class='form'>
+                            <form method='post' th:action="@{/myProfile/user/bankAccount/add}" th:object="${bankDto}">
+
+                                    <span
+                                            style="display: block; color: red; margin: 40px 0 15px 0;"
+                                            th:if="${#fields.hasErrors('bankAccountName')}">Bank account name field can not be
+                                        blank</span>
+                                <div class='field'>
+                                    <input name="bankAccountName" placeholder="Bank account name" type="text"/>
+                                </div>
+                                <span
+                                        style="display: block; color: red; margin: 40px 0 15px 0;"
+                                        th:if="${#fields.hasErrors('description')}">Description field can not be
+                                        blank</span>
+                                <div class='field'>
+                                    <input name="description" placeholder="Description.." type="text"/>
+                                </div>
+                                <span
+                                        style="display: block; color: red; margin: 40px 0 15px 0;"
+                                        th:if="${#fields.hasErrors('iban')}">IBAN field can not be
+                                        blank</span>
+                                <div class='field'>
+                                    <input name="iban" placeholder="IBAN.."
+                                           type="text"/>
+                                </div>
+                                <div class='field'>
+                                    <input type="submit" value="Submit"/>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:replace="common/header :: footer"/>
+<div th:replace="common/header :: body-bottom-scripts"/>
+</body>
+</html>

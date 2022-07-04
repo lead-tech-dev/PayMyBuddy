@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1000/xhtml">
+<head>
+    <head th:replace="common/header :: common-header"/>
+</head>
+<body>
+<div th:replace="common/header :: header-top"/>
+<div th:replace="common/header :: header"/>
+
+<div class='current-link-area'>
+    <div class='container'>
+        <div class='row'>
+            <div class='current-link-area__links'>
+                <a class='active' href='#0'>Admin</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="content-area">
+    <div class="container">
+        <div class="row">
+            <div class="content-area__profile">
+                <div class="info-box">
+                    <div class='email-manage'>
+                        <h3>Edit E-mail</h3>
+                        <div class='form'>
+                            <form action='#' method='post'>
+                                <div class='field'>
+                                    <input name="email" placeholder="Email.." type="email"/>
+                                </div>
+                                <div class='field'>
+                                    <input type="submit" value="Submit"></input>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class='password-manage'>
+                        <h3>Edit password</h3>
+                        <div class='form'>
+                            <form action='#' method='post'>
+                                <div class='field'>
+                                    <input name="oldPassword" placeholder="Old password.." type="password"/>
+                                </div>
+                                <div class='field'>
+                                    <input name="newPassword" placeholder="New-password.." type="password"/>
+                                </div>
+                                <div class='field'>
+                                    <input name="retypeNewPassword" placeholder="Retype the new password.."
+                                           type="password"/>
+                                </div>
+                                <div class='field'>
+                                    <input type="submit" value="Submit"></input>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="money-box">
+                    <div class='solde'>
+                        <h3>COMMISSION TOTAL</h3>
+                        <span>100.15€</span>
+                    </div>
+                    <div class='add-coupon'>
+                        <div style="width: 100%">
+                            <a class="btn-secondary" style="width: 100%;
+                           text-align: center; margin: 40px 0" th:href="@{/admin/coupon}"> Manage Coupons</a>
+                        </div>
+                        <div>
+                            <a class="btn-secondary" style="width: 100%;
+                           text-align: center;" th:href="@{/admin/messages}"> Contact Messages</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="content-area__head">
+                <div class="info">
+                    <h3>Users List</h3>
+
+                </div>
+                <table class="table">
+                    <tr>
+                        <th>Email</th>
+                        <th>Action</th>
+                    </tr>
+                    <tr>
+                        <td><a th:href="@{/admin/1}">laplume@gmail.com</a></td>
+                        <td><a href='#0'><img alt='remove icon' src='/images/remove-user.png'/></a></td>
+                    </tr>
+                    <tr>
+                        <td><a th:href="@{/admin/2}">clairemarie@yahoo.com<</a></td>
+                        <td><a href='#0'><img alt='remove icon' src='/images/remove-user.png'/></a></td>
+                    </tr>
+                    <tr>
+                        <td><a th:href="@{/admin/2}">willsmith@hotmail.com</a></td>
+                        <td><a href='#0'><img alt='remove icon' src='/images/remove-user.png'/></a></td>
+                    </tr>
+                </table>
+                <div class="pagination">
+                    <a href="#">&laquo;</a>
+                    <a href="#">1</a>
+                    <a class="active" href="#">
+                        2
+                    </a>
+                    <a href="#">3</a>
+                    <a href="#">4</a>
+                    <a href="#">5</a>
+                    <a href="#">&raquo;</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:replace="common/header :: footer"/>
+<div th:replace="common/header :: body-bottom-scripts"/>
+</body>
+</html>

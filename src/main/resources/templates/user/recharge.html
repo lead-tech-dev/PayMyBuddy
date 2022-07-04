@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1000/xhtml"
+>
+<head>
+    <head th:replace="common/header :: common-header"/>
+</head>
+<body>
+<div th:replace="common/header :: header-top"/>
+<div th:replace="common/header :: header"/>
+
+<div class='current-link-area'>
+    <div class='container'>
+        <div class='row'>
+            <div class='current-link-area__links'>
+                <a th:href="@{/myProfile}">Profile</a>
+                <span>/</span>
+                <a class='active' href='#0'>Recharge</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="content-area">
+    <div class="container">
+        <div class="row">
+            <div class="content-area__profile">
+                <div class="info-box">
+                    <div class='add-coupon'>
+                        <h3>Recharge account</h3>
+                        <div class="form">
+                            <form method='post' th:action="@{/myProfile/user/recharge/add}"
+                                  th:if="${couponRechargeDto != null}" th:object="${couponRechargeDto}">
+                            <span
+                                    style="display: block; color: red; margin: 15px 0;"
+                                    th:errors="*{couponId}" th:if="${#fields.hasErrors('couponId')}"/>
+                                <div class='field'>
+                                    <input name="couponId" placeholder="Coupon ID.." type="text"/>
+                                </div>
+                                <div class='field'>
+                                    <input type="submit" value="Recharge"/>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:replace="common/header :: footer"/>
+<div th:replace="common/header :: body-bottom-scripts"/>
+</body>
+</html>

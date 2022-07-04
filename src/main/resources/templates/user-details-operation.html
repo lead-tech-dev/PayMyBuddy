@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1000/xhtml">
+<head>
+    <head th:replace="common/header :: common-header"/>
+</head>
+<body>
+<div th:replace="common/header :: header-top"/>
+<div th:replace="common/header :: header"/>
+
+<div class='current-link-area'>
+    <div class='container'>
+        <div class='row'>
+            <div class='current-link-area__links'>
+                <a th:href="@{/myProfile}">Admin</a>
+                <span>/</span>
+                <a class='active' href='#0'><span th:text="${user.name}"/></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="content-area">
+    <div class="container">
+        <div class="row">
+            <div class="content-area__table" th:if="${!transactions.empty}">
+                <div class="info">
+                    <h3>Operations list</h3>
+                    <h3>Balance: <span th:text="${balance} + '€'"/></h3>
+                </div>
+                <table class="table">
+                    <tr>
+                        <th>Date</th>
+                        <th>Connections</th>
+                        <th>Description</th>
+                        <th>Amount</th>
+                    </tr>
+                    <tr th:each="transaction: ${transactions}">
+                        <td th:text="${#dates.format(transaction.transferDate, 'dd-MM-yyyy')} "/>
+                        <td th:if="${user.id == transaction.credit.id} and ${user.id == transaction.debtor.id} and ${transaction.type.toString() == 'BANK'}"
+                            th:text="${'bank account'}"/>
+                        <td th:if="${user.id == transaction.credit.id} and ${transaction.type.toString() == 'OPERATION'}"
+                            th:text="${transaction.debtor.name}"/>
+                        <td th:if="${user.id == transaction.debtor.id} and ${transaction.type.toString() == 'OPERATION'}"
+                            th:text="${transaction.credit.name}"/>
+                        <td th:if="${user.id == transaction.credit.id} and ${transaction.type.toString() == 'RECHARGE'}"
+                            th:text="${transaction.debtor.name}"/>
+                        <td th:if="${user.id == transaction.debtor.id} and ${transaction.type.toString() == 'RECHARGE'}"
+                            th:text="${'Admin'}"/>
+                        <td th:text="${transaction.description} "/>
+                        <td th:if="${transaction.credit.id == user.id} and ${user.id == transaction.debtor.id}  and ${transaction.type.toString() == 'BANK'}"
+                            th:text="'-' + ${transaction.amount + transaction.commission} + '€' "/>
+                        <td th:if="${transaction.credit.id == user.id} and ${transaction.type.toString() == 'OPERATION'}"
+                            th:text="'-' + ${transaction.amount + transaction.commission} + '€' "/>
+                        <td th:if="${transaction.debtor.id == user.id} and ${transaction.type.toString() == 'OPERATION'}"
+                            th:text="'+' + ${transaction.amount} + '€' "/>
+                        <td th:if="${transaction.debtor.id == user.id} and ${transaction.type.toString() == 'RECHARGE'}"
+                            th:text="'+' + ${transaction.amount} + '€' "/>
+
+                    </tr>
+                </table>
+                <div class="pagination">
+                    <a th:href="@{'/myProfile/admin/user/'+ ${user.id} +'/page/' + ${currentPage - 1}}"
+                       th:if="${currentPage > 1}">&laquo;</a>
+                    <span th:each="i: ${#numbers.sequence(1, totalPages)}">
+                        <a th:class="${currentPage == i } ? active : ''"
+                           th:href="@{'/myProfile/admin/user/'+ ${user.id} +'/page/' + ${i}}">[[${i
+                            }]]</a>
+                    </span>
+                    <a th:href="@{'/myProfile/admin/user/'+ ${user.id} +'/page/' + ${currentPage + 1}}"
+                       th:if="${currentPage < totalPages}">
+                        &raquo;</a>
+                </div>
+            </div>
+            <div class="content-area__table" th:if="${transactions.empty}">
+                <div class="info">
+                    <h3>My Transactions</h3>
+                    <h3>Balance: <span th:text="${balance} + '€'"/></h3>
+                </div>
+                <div style="text-align: center; margin-top: 70px">
+                    <span th:text="'No transaction available for ' + ${user.name} + '!'"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:replace="common/header :: footer"/>
+<div th:replace="common/header :: body-bottom-scripts"/>
+</body>
+</html>

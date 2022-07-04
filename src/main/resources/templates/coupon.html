@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1000/xhtml">
+<head>
+    <head th:replace="common/header :: common-header"/>
+</head>
+<body>
+<div th:replace="common/header :: header-top"/>
+<div th:replace="common/header :: header"/>
+
+<div class='current-link-area'>
+    <div class='container'>
+        <div class='row'>
+            <div class='current-link-area__links'>
+                <a class='active' th:href="@{/myProfile}">Admin</a>
+                <span>/</span>
+                <a class='active' href='#0'>Coupon</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="content-area">
+    <div class="container">
+        <div class="row">
+            <div class="content-area__head">
+                <div class="info">
+                    <h3>Add Coupons</h3>
+                </div>
+                <form method="post" th:action="@{/myProfile/admin/coupon/generate}">
+                    <div class="head-box">
+                        <div class="inner">
+                        <select name="nbrCoupon">
+                            <option value="">--Number of Coupon--</option>
+                            <option th:text="10" th:value="10"></option>
+                            <option th:text="20" th:value="20"></option>
+                            <option th:text="30" th:value="30"></option>
+                            <option th:text="40" th:value="40"></option>
+                            <option th:text="50" th:value="50"></option>
+                            <option th:text="60" th:value="60"></option>
+                        </select>
+                        </div>
+                            <div class="inner">
+                        <div class="amount">
+                            <input max="100" min="1" name="price" step="1" type="number" value="1"/>
+                        </div>
+                            </div>
+                        <div class="inner">
+                            <button class="button" type="submit">
+                                Generate
+                            </button>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+            <div class="content-area__table" th:if=${!coupons.empty}>
+                <h3>All Coupons</h3>
+                <table class="table">
+                    <tr>
+                        <th>Coupon ID</th>
+                        <th>Price</th>
+                        <th>Expiration Date</th>
+                        <th>Action</th>
+                    </tr>
+                    <tr th:each="coupon: ${coupons}">
+                        <td th:text="${coupon.id}"/>
+                        <td th:text="${coupon.price}"/>
+                        <td th:text="${coupon.expiredAt}"/>
+                        <td><a
+                                th:href="${'/myProfile/admin/coupon/' + {coupon.id} + '/' + {currentPage}}"><img
+                                alt='remove icon'
+                                src='/images/remove-user.png'/></a></td>
+                    </tr>
+                </table>
+                <div class="pagination">
+                    <a th:href="@{'/myProfile/admin/coupon/page/' + ${currentPage - 1}}" th:if="${currentPage > 1}">&laquo;</a>
+                    <span th:each="i: ${#numbers.sequence(1, totalPages)}">
+                        <a th:class="${currentPage == i } ? active : ''"
+                           th:href="@{'/myProfile/admin/coupon/page/' + ${i}}">[[${i
+                            }]]</a>
+                    </span>
+                    <a th:href="@{'/myProfile/admin/coupon/page/' + ${currentPage + 1}}"
+                       th:if="${currentPage < totalPages}">
+                        &raquo;</a>
+                </div>
+            </div>
+
+            <div class="content-area__table" th:if=${coupons.empty}>
+                <h3>All Coupons</h3>
+                <div style="text-align: center; margin-top: 70px">
+                    <span>No coupon available!</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:replace="common/header :: footer"/>
+<div th:replace="common/header :: body-bottom-scripts"/>
+</body>
+</html>

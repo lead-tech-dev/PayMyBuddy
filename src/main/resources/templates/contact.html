@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1000/xhtml">
+<head>
+    <head th:replace="common/header :: common-header"/>
+</head>
+<body>
+<div th:replace="common/header :: header-top"/>
+<div th:replace="common/header :: header"/>
+
+<div class='current-link-area'>
+    <div class='container'>
+        <div class='row'>
+            <div class='current-link-area__links'>
+                <a href='/'>Home</a>
+                <span>/</span>
+                <a class='active' href='#0'>Contact</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="contact-area">
+    <div class="container">
+        <div class="row">
+            <div class="contact-area__info-box">
+                <h3>Do you have a problem? Leave us a message.</h3>
+            </div>
+            <div class="form">
+                <form method='post' th:action="@{/contact/add}" th:object="${contact}">
+                    <span
+                            style="display: block; color: red; margin: 40px 0 15px 0;"
+                            th:if="${#fields.hasErrors('firstname')}">Firstname field can not be blank</span>
+                    <div class='field'>
+                        <input name="firstname" placeholder="Firstname.." th:field="${contact.firstname}" type="text"/>
+                    </div>
+
+                    <span
+                            style="display: block; color: red; margin: 40px 0 15px 0;"
+                            th:if="${#fields.hasErrors('lastname')}">Lastname field can not be blank</span>
+                    <div class='field'>
+                        <input name="lastname" placeholder="Lastname.." th:field="${contact.lastname}" type="text"/>
+                    </div>
+
+                    <span
+                            style="display: block; color: red; margin: 40px 0 15px 0;"
+                            th:if="${#fields.hasErrors('email')}">Email field can not be blank</span>
+                    <div class='field'>
+                        <input name="email" placeholder="Email.." th:field="${contact.email}" type="email"/>
+                    </div>
+
+                    <span
+                            style="display: block; color: red; margin: 40px 0 15px 0;"
+                            th:if="${#fields.hasErrors('subject')}">Subject field can not be blank</span>
+                    <div class='field'>
+                        <input name="subject" placeholder="Subject.." th:field="${contact.subject}" type="text"/>
+                    </div>
+
+                    <span
+                            style="display: block; color: red; margin: 40px 0 15px 0;"
+                            th:if="${#fields.hasErrors('message')}">Message field can not be blank</span>
+                    <div class=''>
+                        <textarea name="message" th:field="${contact.message}">Message...</textarea>
+                    </div>
+
+                    <div class='field'>
+                        <input type="submit" value="Send"></input>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:replace="common/header :: footer"/>
+<div th:replace="common/header :: body-bottom-scripts"/>
+</body>
+</html>

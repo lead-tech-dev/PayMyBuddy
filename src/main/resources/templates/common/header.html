@@ -1,0 +1,113 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="common-header">
+    <meta charset="utf-8"/>
+    <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+
+    <title>Pay My Buddy</title>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,600;0,700;1,400&display=swap"
+          rel="stylesheet">
+
+
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+
+    <link href="/image/applie-touch-icon.png" rel="icon"/>
+</head>
+<body>
+<div th:fragment="header-top">
+    <div class='header-top-area'>
+        <h2>Pay My Buddy</h2>
+    </div>
+</div>
+<div th:fragment="header">
+    <header class="header-area">
+        <div class="container">
+            <div class="row">
+                <div class="header-area__logo">
+                    <a class="logo-btn" href="/">Pay My Buddy</a>
+                </div>
+                <div class="header-area__navigation">
+                    <nav>
+                        <ul>
+                            <li><a class="active" th:href="@{/}">Home</a></li>
+                            <li sec:authorize="hasRole('USER')"><a th:href="@{/myProfile/user/transfer}">Transfer</a>
+                            </li>
+
+                            <li sec:authorize="isAuthenticated()"><a th:href="@{/myProfile}">Profile</a></li>
+
+                            <li sec:authorize="isAnonymous()"><a href="/login">Login</a></li>
+                            <li sec:authorize="isAnonymous()"><a href="/signup">Signup</a></li>
+                            <li><a th:href="@{/contact}">Contact</a></li>
+                            <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Log off</a></li>
+
+                        </ul>
+                    </nav>
+                </div>
+                <div class="header-area__mobile">
+                    <nav>
+                        <ul>
+                            <li><a class="active" th:href="@{/}">Home</a></li>
+                            <li sec:authorize="hasRole('USER')"><a th:href="@{/myProfile/user/transfer}">Transfer</a>
+                            </li>
+
+                            <li sec:authorize="isAuthenticated()"><a th:href="@{/myProfile}">Profile</a></li>
+
+                            <li sec:authorize="isAnonymous()"><a href="/login">Login</a></li>
+                            <li sec:authorize="isAnonymous()"><a href="/signup">Signup</a></li>
+                            <li><a th:href="@{/contact}">Contact</a></li>
+                            <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Log off</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <div
+                        class="header-area__hamburger " id="mainmenu">
+                    <svg height="17" width="24" xmlns="http://www.w3.org/2000/svg">
+                        <g fill="FFF#" fill-rule="evenodd">
+                            <path d="M0 0h24v3H0zM0 7h24v3H0zM0 14h24v3H0z"/>
+                        </g>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </header>
+</div>
+<div th:fragment="current-link">
+    <div class='current-link-area'>
+        <div class='container'>
+            <div class='row'>
+                <div class='current-link-area__links'>
+                    <a href='#0'>Home</a>
+                    <span>/</span>
+                    <a class='active' href='#0'>Contact</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:fragment="footer">
+    <footer class="footer-area">
+        <div class='container'>
+            <div class='row'>
+                <div class='footer-area__logo'>
+                    <a class='logo-btn' href='#0'>Pay My Buddy</a>
+                </div>
+                <div class='footer-area__social-icons'>
+                    <a href='#0'><img alt='facebook' src='/images/facebook.png'/></a>
+                    <a href='#0'><img alt='instagram' src='/images/instagram.png'/></a>
+                    <a href='#0'><img alt='twitter' src='/images/twitter.png'/></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>
+
+<div th:fragment="body-bottom-scripts">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script  th:src="@{/js/style.js}"></script>
+</div>
+
+</body>
+</html>

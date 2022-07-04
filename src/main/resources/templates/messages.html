@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1000/xhtml">
+<head>
+    <head th:replace="common/header :: common-header"/>
+</head>
+<body>
+<div th:replace="common/header :: header-top"/>
+<div th:replace="common/header :: header"/>
+
+<div class='current-link-area'>
+    <div class='container'>
+        <div class='row'>
+            <div class='current-link-area__links'>
+                <a class='active' th:href="@{/myProfile}">Admin</a>
+                <span>/</span>
+                <a class='active' th:href="@{/myProfile/admin/messages}">Messages</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="content-area">
+    <div class="container">
+        <div class="row">
+            <div class="content-area__head" th:if=${!messages.empty}>
+                <div class="info">
+                    <h3>Messages List</h3>
+
+                </div>
+                <table class="table">
+                    <tr>
+                        <th>Firstname</th>
+                        <th>Email</th>
+                        <th>Subject</th>
+                        <th>Action</th>
+                    </tr>
+                    <tr th:each="message: ${messages}">
+                        <td th:text="${message.firstname}"/>
+                        <td th:text="${message.email}"/>
+                        <td th:text="${message.subject}"/>
+                        <td><a th:href="${'/myProfile/admin/messages/' + {message.id}}">
+                            <img alt='view icon' src='/images/view.png'/>
+                        </a>
+                            <a th:href="${'/myProfile/admin/messages/remove/' + {message.id} + '/' + {currentPage}}">
+                                <img alt='remove icon' src='/images/remove-user.png'/>
+                            </a>
+                        </td>
+                    </tr>
+                </table>
+                <div class="pagination">
+                    <a th:href="@{'/myProfile/admin/messages/page/' + ${currentPage - 1}}" th:if="${currentPage > 1}">&laquo;</a>
+                    <span th:each="i: ${#numbers.sequence(1, totalPages)}">
+                        <a th:class="${currentPage == i } ? active : ''"
+                           th:href="@{'/myProfile/admin/messages/page/' + ${i}}">[[${i
+                            }]]</a>
+                    </span>
+                    <a th:href="@{'/myProfile/admin/messages/page/' + ${currentPage + 1}}"
+                       th:if="${currentPage < totalPages}">
+                        &raquo;</a>
+                </div>
+            </div>
+            <div class="content-area__head" th:if=${messages.empty}>
+                <h3>Message List</h3>
+                <div style="text-align: center; margin-top: 70px">
+                    <span>No message available!</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:replace="common/header :: footer"/>
+<div th:replace="common/header :: body-bottom-scripts"/>
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1000/xhtml">
+<head>
+    <head th:replace="common/header :: common-header"/>
+</head>
+<body>
+<div th:replace="common/header :: header-top"/>
+<div th:replace="common/header :: header"/>
+
+<div class='current-link-area'>
+    <div class='container'>
+        <div class='row'>
+            <div class='current-link-area__links'>
+                <a th:href="@{/myProfile}">Profile</a>
+                <span>/</span>
+                <a class='active' href='#0'>Add-connection</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="content-area">
+    <div class="container">
+        <div class="row">
+            <div class="content-area__head">
+                <div class="info">
+                    <h3>Add Connection</h3>
+                </div>
+
+                    <form method="get" th:action="@{/myProfile/user/add-connection}">
+                        <div class="head-box">
+                        <div class="inner">
+                            <input name="keyword" placeholder='Email' type="text"/>
+                        </div>
+                        <div class="inner">
+                            <button class="button" type="submit">
+                                Search
+                            </button>
+                        </div>
+                        </div>
+                    </form>
+
+            </div>
+            <div class="content-area__head" th:if=${!users.empty}>
+                <h3>All Users</h3>
+
+                <table class="table">
+                    <tr>
+                        <th>Email</th>
+                        <th>Action</th>
+                    </tr>
+                    <tr th:each="current: ${users}" th:if="${current.id} != ${user.id}">
+                        <td th:text="${current.email}"/>
+                        <td>
+                            <a
+                                    class="btn-secondary"
+                                    th:href="${'/myProfile/user/add-connection/add/' + {current.id}}">add
+                            </a>
+
+                        </td>
+                    </tr>
+
+                </table>
+                <!-- <div class="pagination">
+                     <a th:if="${currentPage > 1}" th:href="@{'/myProfile/add-connection/page/' + ${currentPage - 1 } + '?keyword=' +  ${param.keyword}">
+                         &laquo;</a>
+                     <span th:each="i: ${#numbers.sequence(1, totalPages)}">
+                         <a th:href="@{'/myProfile/add-connection/page/' + ${i}}"
+                            th:class="${currentPage == i } ? active : ''">[[${i}]]</a>
+                     </span>
+                     <a th:if="${currentPage < totalPages}" th:href="@{'/myProfile/add-connection/page/' + ${currentPage + 1 }}">
+                         &raquo;</a>
+                 </div>-->
+            </div>
+            <div class="content-area__head" th:if=${users.empty}>
+                <h3>All Users</h3>
+                <div style="text-align: center; margin-top: 70px">
+                    <span>No result available!</span>
+                </div>
+                <!-- <div class="pagination">
+                     <a th:if="${currentPage > 1}" th:href="@{'/myProfile/add-connection/page/' + ${currentPage - 1 } + '?keyword=' +  ${param.keyword}">
+                         &laquo;</a>
+                     <span th:each="i: ${#numbers.sequence(1, totalPages)}">
+                         <a th:href="@{'/myProfile/add-connection/page/' + ${i}}"
+                            th:class="${currentPage == i } ? active : ''">[[${i}]]</a>
+                     </span>
+                     <a th:if="${currentPage < totalPages}" th:href="@{'/myProfile/add-connection/page/' + ${currentPage + 1 }}">
+                         &raquo;</a>
+                 </div>-->
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:replace="common/header :: footer"/>
+<div th:replace="common/header :: body-bottom-scripts"/>
+</body>
+</html>

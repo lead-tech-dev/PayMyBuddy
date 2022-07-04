@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1000/xhtml">
+<head>
+    <head th:replace="common/header :: common-header"/>
+</head>
+<body>
+<div th:replace="common/header :: header-top"/>
+
+<div class="account-area">
+    <div class="container">
+        <div class="row">
+            <div class="account-area__info-box">
+                <div class="logo">
+                    <a class="logo-btn" href="/">
+                        Pay My Buddy
+                    </a>
+                </div>
+                <div class="social-account">
+                    <a th:href="${facebook}">
+                        <img src="images/facebook-login.png"/>
+                        <span>Facebook</span>
+                    </a>
+
+                    <a th:href="${google}">
+                        <img src="images/google.png"/>
+                        <span>Google</span>
+                    </a>
+                </div>
+                <div class="form">
+                    <form method="post" th:action="@{/loginUser}">
+                        <div class='field'>
+                            <input name="email" placeholder="Email.." type="email"/>
+                        </div>
+                        <div class='field'>
+                            <input name="password" placeholder="Password.." type="password"/>
+                        </div>
+                        <div class='field'>
+                            <input id="remember-me" name="remember-me" type="checkbox"/> <label for="remember-me">Remember
+                            me</label>
+                        </div>
+                        <div style="text-align: center">
+                             <span
+                                     style="color: red; margin: 10px 0;"
+                                     th:if="${errorCredentials}">Email or Password incorrect</span>
+                        </div>
+                        <div class='field'>
+                            <input type="submit" value="Login"></input>
+                        </div>
+                    </form>
+                </div>
+                <p>Doesn't have an account ? <a href="/signup">Signup</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:replace="common/header :: footer"/>
+<div th:replace="common/header :: body-bottom-scripts"/>
+</body>
+</html>
