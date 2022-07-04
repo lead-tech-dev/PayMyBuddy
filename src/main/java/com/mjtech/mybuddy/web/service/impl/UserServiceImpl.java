@@ -110,8 +110,8 @@ public class UserServiceImpl implements UserService {
    */
   @Override
   public Users createUser(Users users, Set<UserRole> usersRoles) throws Exception {
-    Users localUsers = usersRepository.findByUsername(users.getUsername());
-    Users admin = usersRepository.findUserAdmin();
+    Users localUsers = usersRepository.findByEmail(users.getEmail());
+
     if (localUsers != null) {
       log.info("Users {} already exists. Nothing will be done", users.getUsername());
     } else {
