@@ -34,6 +34,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
 import java.security.Principal;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
@@ -220,6 +221,20 @@ public class AccountController {
 
 
     userService.createUser(user, userRoles);
+
+    Account account = new Account();
+    account.setCreatedAt(new Date());
+    account.setBalance(0);
+    account.setUser(user);
+    accountService.saveAccount(account);
+
+    Connection connection = new Connection();
+    connection.setReceiver(user);
+    connection.setCreatedAt(new Date());
+    connection.setSender(admin);
+    connection.setStatus(Status.ACTIVE);
+    connectionService.saveConnection(connection);
+
     log.error("{}, successful added!", user.getUsername());
     return "login";
   }

@@ -124,21 +124,6 @@ public class UserServiceImpl implements UserService {
 
       localUsers = usersRepository.save(users);
 
-      Account account = new Account();
-      account.setCreatedAt(new Date());
-      account.setBalance(0);
-      account.setUser(localUsers);
-
-      Connection connection = new Connection();
-      connection.setReceiver(localUsers);
-      connection.setCreatedAt(new Date());
-      connection.setSender(admin);
-      connection.setStatus(Status.ACTIVE);
-
-
-      accountService.saveAccount(account);
-
-      connectionService.saveConnection(connection);
     }
 
     return localUsers;
