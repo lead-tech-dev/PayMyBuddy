@@ -158,7 +158,7 @@ create table IF NOT EXISTS `coupon`
 );
 
 INSERT INTO coupon (id, expired_at, price, status)
-VALUES (1, '2022-12-01 20:14:01', 90, 'ACTIVE');
+VALUES (1, '2029-12-01 20:14:01', 90, 'ACTIVE');
 INSERT INTO coupon (id, expired_at, price, status)
 VALUES (2, '2022-07-01 20:14:01', 90, 'INACTIVE');
 INSERT INTO coupon (id, expired_at, price, status)

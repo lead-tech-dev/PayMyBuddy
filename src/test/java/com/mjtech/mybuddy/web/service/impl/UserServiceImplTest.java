@@ -167,7 +167,7 @@ class UserServiceImplTest {
     @DisplayName("createUser, should return saved user for given user and role list")
     void createUser_ShouldReturnSavedUser_ForGivenUserAndRoleList() throws Exception {
         // GIVEN
-        when(usersRepository.findByUsername(user.getUsername())).thenReturn(null);
+        //when(usersRepository.findByUsername(user.getUsername())).thenReturn(null);
         when(usersRepository.save(user)).thenReturn(user);
 
         // WHEN
